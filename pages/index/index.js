@@ -9,7 +9,8 @@ Page({
     // hasUserInfo: false,
     // canIUse: wx.canIUse('button.open-type.getUserInfo')
     userLocation: {},
-    markers: []
+    markers: [],
+    includePoints: []
   },
   markertap(e) {
     console.log(e.markerId);
@@ -43,8 +44,10 @@ Page({
           let arr = [];
           let p1 = new Promise(resolve => {
             let flag = 0;
+            let includePointsArr = [];
             res.data.data.forEach(function (item, index) {
-              // console.log(item);
+              console.log(item);
+              includePointsArr.push({ latitude: item.lat, longitude: item.lng })
               let obj = {};
               obj.width = 30;
               obj.height = 30;
@@ -52,9 +55,15 @@ Page({
                 wx.downloadFile({
                   url: item.tenantLogo, //仅为示例，并非真实的资源
                   success: function (res) {
+                    console.log(res);
                     // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
                     if (res.statusCode === 200) {
-                      // console.log(res);
+                      console.log(res);
+                      obj.iconPath = res.tempFilePath;
+                      reso();
+                    }else{
+                      // wx.showToast({title:'标记加载错误',icon:'none'});
+                      console.log('标记加载错误');
                       obj.iconPath = res.tempFilePath;
                       reso();
                     }
@@ -75,6 +84,13 @@ Page({
               obj.latitude = item.lat;
               obj.longitude = item.lng;
               obj.tenantId = item.tenantId;
+              // obj.label = {};
+              // obj.label.content = item.name;
+              // obj.label.anchorY = -55;
+              // obj.label.anchorX = -30;
+              // obj.label.borderRadius = 5;
+              // obj.label.padding = 5;
+              // obj.label.textAlign = 'center';
               obj.callout = {};
               obj.callout.display = 'ALWAYS';
               obj.callout.borderRadius = 5;
@@ -82,6 +98,7 @@ Page({
               obj.callout.content = item.name;
               obj.tenantName = item.tenantName;
             });
+            self.setData({includePoints: includePointsArr});
           });
           p1.then(function(){
             console.log(arr);
