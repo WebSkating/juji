@@ -34,6 +34,8 @@ App({
     })
   },
   globalData: {
+    dev:true,
+    baseApiAddress:'http://uney.juniuo.com/',
     userInfo: null
   }
 })

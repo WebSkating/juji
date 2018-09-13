@@ -12,6 +12,9 @@ Page({
     markers: [],
     includePoints: []
   },
+  showFocusList(){
+    console.log('showFocusList');
+  },
   markertap(e) {
     console.log(e.markerId);
     console.log(e);

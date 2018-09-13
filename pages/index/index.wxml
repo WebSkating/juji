@@ -1,17 +1,10 @@
 <!--index.wxml-->
-<!-- <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+<view class="tab-switch">
+  <view class="tab-switch-inner">
+    <view class="tab-switch-btn switch-btn-active">附近</view>
+    <view class="tab-switch-btn" bindtap="showFocusList">已关注</view>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
-</view> -->
-<view class="map-container">
-  <map id="myMap" show-location="true" markers="{{markers}}" bindmarkertap="markertap" bindcallouttap="markertap" style="width:100%;height:100%;" scale="14"      include-points="{{includePoints}}"></map>
 </view>
-
+<view class="map-container">
+  <map id="myMap" show-location="true" markers="{{markers}}" bindmarkertap="markertap" bindcallouttap="markertap" style="width:100%;height:100%;" scale="14" include-points="{{includePoints}}"></map>
+</view>
